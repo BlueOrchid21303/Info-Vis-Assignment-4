@@ -66,9 +66,15 @@ const Charts = () => {
 
     //Task 6: Complete the xScaleBar and yScaleBar
     //Hint: use d3.scaleBand for xScaleBar
-    const xScaleBar=[]; //replace it with the correct scale
+    const xScaleBar = d3.scaleBand()
+        .domain(data.map(d => d.station))
+        .range([0, innerWidth])
+        .padding(0.1); 
        
-    const yScaleBar=[]; //replace it with the correct scale
+    const yScaleBar = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.start)]) 
+        .range([innerHeightBar, 0])
+        .nice();
 
 
     //Task1: Complete the changeHandler function
@@ -77,7 +83,7 @@ const Charts = () => {
     //Hint: use setMonth function; also you can use console.log to see the value of event.target.value
     const changeHandler = (event) => {
        //Todo: update the month based on the value of the input element
-
+       setMonth(event.target.value);
     };
 
     return (
@@ -97,8 +103,8 @@ const Charts = () => {
                 <Col>
                     {//Todo: uncomment the following line when you complete the xScaleBar and yScaleBar and work on the bar chart
                     }
-                    {/* <BarChart svgWidth={WIDTH} svgHeight={HEIGHT} marginLeft={margin.left} marginTop={margin.bottom} data={data} xScale={xScaleBar} 
-                        yScale={yScaleBar} />  */}
+                    {<BarChart svgWidth={WIDTH} svgHeight={HEIGHT} marginLeft={margin.left} marginTop={margin.bottom} data={data} xScale={xScaleBar} 
+                        yScale={yScaleBar} />}
                 </Col>
             </Row>
         </Container>

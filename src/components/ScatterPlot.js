@@ -18,7 +18,7 @@ export default function ScatterPlot(props){
             const xAxis_spl = d3.axisBottom(xScale).ticks(10);
             //Task 2. create the y-axis
             //Hint: use the code for the x-axis as a reference
-        
+            const yAxis_spl = d3.axisLeft(yScale).ticks(10);
 
             let tooltip = d3.select("body").append("div")
                         .attr("class", "tooltip")
@@ -47,6 +47,19 @@ export default function ScatterPlot(props){
             //Hint: 
             // 1. use the code for the x-axis and x-axis label as a reference
             // 2.the y-axis label should be rotated by -90 degrees; use the rotate(-90) attribute
+            spl.append('g')
+            .attr('transform', 'translate(0,0)')
+            .attr('class', 'y-axis')
+            .call(yAxis_spl);
+
+            spl.append('g')
+            .attr("transform", "translate(0,0)")
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -70)
+            .attr("y", 20)
+            .style("text-anchor", "middle")
+            .text("Trip duration end in");
            
             drawScatterPlot(spl, data, xScale, yScale, tooltip, width-20, height-20);
 
